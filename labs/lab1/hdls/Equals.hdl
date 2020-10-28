@@ -1,0 +1,13 @@
+CHIP Equals {
+    IN a, b;
+    OUT out;
+
+    PARTS:
+        Nand(a=a, b=b, out=nandab);
+        Not(in=a, out=nota);
+        Not(in=b, out=notb);
+        Nand(a=nota, b=notb, out=or);
+        Nand(a=or, b=nandab, out=out);
+        
+        
+}

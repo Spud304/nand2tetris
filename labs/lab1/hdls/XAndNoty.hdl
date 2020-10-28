@@ -1,0 +1,10 @@
+CHIP XAndNoty{
+    IN x, y;
+    OUT out;
+
+    PARTS:
+    Not(in=y, out=notY);
+    And(a=x, b=notY, out=out);
+    
+    
+}

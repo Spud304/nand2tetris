@@ -1,0 +1,9 @@
+CHIP Twochips {
+    IN in;
+    OUT out;
+
+    PARTS:
+        Nand(a=in, b=in, out=foo);
+        Not(in=foo, out=out);
+                
+}
