@@ -7,3 +7,30 @@
 // (R0, R1, R2 refer to RAM[0], RAM[1], and RAM[2], respectively.)
 
 // Put your code here.
+
+
+
+@2
+M=0
+
+(FOR_LOOP)
+  @1
+  D=M
+  @END
+  D;JEQ //Escape if 0
+  
+  @0
+  D=M
+  @2
+  M=M+D
+  
+  @1
+  M=M-1
+  
+  @FOR_LOOP
+  0;JMP // For Loop
+
+(END)
+
+  @END
+  0;JMP // infinite loop
