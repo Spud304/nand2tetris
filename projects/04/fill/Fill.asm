@@ -11,16 +11,54 @@
 // "white" in every pixel;
 // the screen should remain fully clear as long as no key is pressed.
 
+
 // Put your code here.
 
+(INPUT)
+@KBD		//check if a key is pressed (no key = 0)
+D=M
 
-@3
-D=A
+@color
+M=0
 
-@0
-M=D
+@FILL_SCREEN		//skip the blacken code
+D;JEQ // if 0
+
+@BLACKEN
+0;JMP
+
+@INPUT
+0;JMP
 
 
-@20
-A=A+D
+(BLACKEN)
+@color
 M=-1
+
+
+(FILL_SCREEN)
+	@SCREEN //16373
+	D=A
+	@screen
+	M=D
+
+	(FILL_LOOP)
+		@color
+		D=M
+		@screen
+		A=M
+		M=D 
+
+		@screen
+		M=M+1 
+
+		@24576 
+		D=A
+		@screen
+		D=D-M 
+	@FILL_LOOP
+	D;JGT 
+	
+@INPUT
+0;JMP
+
