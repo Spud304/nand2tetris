@@ -11,52 +11,53 @@
 // "white" in every pixel;
 // the screen should remain fully clear as long as no key is pressed.
 
+
 // Put your code here.
 
-(READ_INPUT)
-	@KBD
-	D=M
+(INPUT)
+@KBD		//check if a key is pressed (no key = 0)
+D=M
 
-	@color
-	M=0
+@color
+M=0
 
-	@FILL_SCREEN
-	D;JEQ // if keyboard = 0, goto FILL_SCREEN
+@FILL_SCREEN		//skip the blacken code
+D;JEQ // if 0
 
-	@MAKE_COLOR_BLACK
-	0;JMP // else, goto MAKE_COLOR_BLACK
-@READ_INPUT
+@BLACKEN
 0;JMP
 
-(MAKE_COLOR_BLACK)
+@INPUT
+0;JMP
+
+
+(BLACKEN)
 @color
 M=-1
 
-(FILL_SCREEN)
-	// if @color = -1 then screen becomes black,
-	// else if @color = 0, screen becomes white
 
-	@SCREEN
+(FILL_SCREEN)
+	@SCREEN //16373
 	D=A
 	@screen
-	M=D // screen = SCREEN
+	M=D
 
 	(FILL_LOOP)
 		@color
 		D=M
 		@screen
 		A=M
-		M=D // MEM[MEM[screen]] = color
+		M=D 
 
 		@screen
-		M=M+1 // MEM[screen] += 1
+		M=M+1 
 
-		@24576 // SCREEN + (512*256) // SCREEN = 16384
+		@24576 
 		D=A
 		@screen
-		D=D-M // D = 24576 - screen
+		D=D-M 
 	@FILL_LOOP
-	D;JGT // if D > 0 goto FILL_LOOP
-
-@READ_INPUT
+	D;JGT 
+	
+@INPUT
 0;JMP
